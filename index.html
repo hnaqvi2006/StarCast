@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarCast | Stargazing Forecast</title>  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>StarCast</h1>
+    <p class="tagline">Find the best night this week to look up.</p>
+
+    <form id="search-form" class="search">
+      <input id="city-input" type="text" placeholder="Search a city, like Tampa" aria-label="City">
+      <button type="submit">Search</button>
+      <button type="button" id="location-button" class="secondary">Use my location</button>
+    </form>
+
+    <p id="status" role="status"></p>
+  </header>
+
+  <main>
+    <section id="results" class="hidden">
+      <div class="card tonight">
+        <p class="eyebrow">Tonight in</p>
+        <h2 id="location"></h2>
+        <p id="verdict"></p>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="label">Sky score</span>
+            <span id="score"></span>
+          </div>
+          <div class="stat">
+            <span class="label">Clouds 9 PM–2 AM</span>
+            <span id="clouds"></span>
+          </div>
+          <div class="stat">
+            <span class="label">Temp at 10 PM</span>
+            <span id="temp"></span>
+          </div>
+          <div class="stat">
+            <span class="label">Sunset</span>
+            <span id="sunset"></span>
+          </div>
+          <div class="stat wide">
+            <span class="label">Moon</span>
+            <span id="moon"></span>
+          </div>
+        </div>
+
+        <form id="save-spot-form" class="save-spot">
+          <input id="spot-name" type="text" maxlength="60" aria-label="Name for this spot">
+          <button type="submit">Save this spot</button>
+        </form>
+        <p id="spot-message" class="message"></p>
+      </div>
+
+      <div class="card">
+        <h3>Tonight, hour by hour</h3>
+        <p class="hint">Cloud cover from 6 PM to 5 AM. Shorter bars mean clearer skies.</p>
+        <div id="hourly" class="hourly"></div>
+      </div>
+
+      <div class="card">
+        <h3>Next 7 nights</h3>
+        <p class="hint">Sky score is out of 100. Clouds count for 70% and moonlight for 30%.</p>
+        <div id="week" class="week"></div>
+      </div>
+    </section>
+
+    <div class="columns">
+      <section class="card">
+        <h3>Saved spots</h3>
+        <p class="hint">Tap a spot to see its forecast.</p>
+        <ul id="spots-list" class="spots"></ul>
+      </section>
+
+      <section class="card">
+        <h3>Observation log</h3>
+        <form id="log-form" class="log-form">
+          <label>
+            What did you see?
+            <input id="log-object" type="text" maxlength="80" placeholder="Jupiter, Orion Nebula...">
+          </label>
+          <label>
+            Where?
+            <input id="log-spot" type="text" maxlength="60" list="spot-options" placeholder="Spot name">
+          </label>
+          <datalist id="spot-options"></datalist>
+          <label>
+            Date
+            <input id="log-date" type="date">
+          </label>
+          <label>
+            Rating
+            <select id="log-rating">
+              <option value="5">★★★★★ Amazing</option>
+              <option value="4">★★★★ Great</option>
+              <option value="3" selected>★★★ Good</option>
+              <option value="2">★★ Meh</option>
+              <option value="1">★ Barely saw it</option>
+            </select>
+          </label>
+          <label class="full">
+            Notes (optional)
+            <textarea id="log-notes" maxlength="300" rows="2" placeholder="What did it look like?"></textarea>
+          </label>
+          <button type="submit" class="full">Add to log</button>
+        </form>
+        <p id="log-message" class="message"></p>
+        <p id="log-count" class="hint"></p>
+        <ul id="log-list" class="log"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    StarCast by Hussain Naqvi &bull; Web Systems for IT Final Project &bull; Weather data from Open-Meteo
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="moon.js"></script>
+  <script src="database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
